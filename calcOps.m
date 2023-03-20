@@ -107,7 +107,7 @@ H_earth = 2*pi*(-gamma_H*B0_earth*Sz-gamma_C*B0_earth*Iz) + H_JHs + JH45C*Iz'*(S
 H_zf    = 2*pi*(-gamma_H*minB0*Sz-gamma_C*minB0*Iz) + H_JHs + H_JCH;
 H0_perB0 = 2*pi*(-gamma_H*Sz-gamma_C*Iz);
 %% initialization
-rho_init = -S1'*S2;
+rho_init  = S1'*S2;
 traceNorm = trace(rho_init'*rho_init);
 coil      = Iz;
 if pars.prepPhase

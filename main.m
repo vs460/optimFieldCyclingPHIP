@@ -54,6 +54,8 @@ B0s = ga(@(x) costFcn(x,pars),nvar,[],[],[],[],[],[],[],options);
 %%
 figure
 B0s = min(pars.maxB0,max(pars.minB0,B0s));
+B0s(1) = pars.minB0;
+B0s(end) = pars.maxB0;
 t = linspace(0,T,nvar);
 subplot(1,2,1); plot(t,B0s*1e6)
 xlabel('Time [ms]'); ylabel('B_0 [uT]')
