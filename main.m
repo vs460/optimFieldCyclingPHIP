@@ -52,5 +52,6 @@ options = optimoptions('ga','InitialPopulationMatrix',population,'PlotFcn',plotO
     'UseVectorized',true,'MaxStallGenerations',NofGens);
 B0s = ga(@(x) costFcn(x,pars),nvar,[],[],[],[],[],[],[],options);
 %%
+B0 = min(pars.maxB0,max(pars.minB0,B0s));
 t = linspace(0,T,nvar);
 figure;plot(t,B0s)
