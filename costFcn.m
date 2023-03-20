@@ -31,7 +31,7 @@ parfor i = 1:npop
         rho = PH*rho*PHt;
     end
     signal_tmp  = trace(coil'*rho)/traceNorm;
-    fitness(i)	= 1e3*(-abs(signal_tmp));
+    fitness(i)	= (-real(signal_tmp));
 end
 % toc
 end
