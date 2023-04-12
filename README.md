@@ -10,4 +10,4 @@ By default the simulation performs the following steps prior to optimization bas
 - Step 3: density matrix averaging at zero field for 1s
 
 These are followed by the optimization of the adiabatic passage that returns B0 from 50 nT to 2 uT.
-Step 1-3 can be swithced by setting pars.prepPhase = false in main.m
+Step 1-3 can be swithced ON and OFF by setting pars.prepPhase = false in main.m
