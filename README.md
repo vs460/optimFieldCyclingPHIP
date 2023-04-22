@@ -11,3 +11,5 @@ By default the simulation performs the following steps prior to optimization bas
 
 These are followed by the optimization of the adiabatic passage that returns B0 from 50 nT to 2 uT.
 Step 1-3 can be swithced ON and OFF by setting pars.prepPhase = false in main.m
+
+Tweak alpha and beta in main.m for different smoothing of the final B0s waveform
