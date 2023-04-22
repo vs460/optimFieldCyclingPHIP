@@ -4,12 +4,15 @@
 clear all
 close all
 rng default
+addpath(genpath('./Chauffert_grad_waveform_design/'))
 %% parameters
 gX    = 10.71e6;    % Xnuc gyromagnetic ratio [Hz/T]
 gH    = 42.57e6;    % 1H gyromagnetic ratio   [Hz/T]
 T     = 2;          % sequence time length [s]
 minB0 = 50e-9;
 maxB0 = 2e-6;
+alpha = 1e-5;
+beta  = 1e-15;
 pars.prepPhase = true;
 %% plot options
 plotOpt    = {@gaplotbestf};
@@ -42,6 +45,7 @@ end
 population(1,:) = linspace(minB0,maxB0,nvar);
 pars.gX  = gX; pars.gH = gH; pars.tau = T/nvar; 
 pars.minB0 = minB0; pars.maxB0 = maxB0; 
+pars.alpha = alpha; pars.beta = beta;
 %%
 [pars.rho_init,pars.H0_perB0,pars.H_JHs,pars.H_JCH,pars.Iz,pars.traceNorm] = calcOps(pars);
 
@@ -53,9 +57,10 @@ options = optimoptions('ga','InitialPopulationMatrix',population,'PlotFcn',plotO
 B0s = ga(@(x) costFcn(x,pars),nvar,[],[],[],[],[],[],[],options);
 %%
 figure
-B0s = min(pars.maxB0,max(pars.minB0,B0s));
 B0s(1) = pars.minB0;
 B0s(end) = pars.maxB0;
+B0s = min(pars.maxB0,max(pars.minB0,B0s));
+B0s = 1e-6*smoothCurveToConstraint(1e6*B0s',pars.tau,pars.alpha,pars.beta,1e6*pars.minB0,1e6*pars.maxB0);
 t = linspace(0,T,nvar);
 subplot(1,2,1); plot(t,B0s*1e6)
 xlabel('Time [ms]'); ylabel('B_0 [uT]')
